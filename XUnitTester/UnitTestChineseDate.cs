@@ -7,48 +7,67 @@ namespace XUnitTester
 {
     public class UnitTestChineseDate
     {
-        private readonly ITestOutputHelper Output;
+        private readonly ITestOutputHelper Console;
 
         public UnitTestChineseDate(ITestOutputHelper tempOutput)
         {
-            this.Output = tempOutput;
+            this.Console = tempOutput;
         }
         [Fact]
         public void Test()
         {
             var date = DateTime.Today;
-            Output.WriteLine(date.ToShortDateString());
+            Console.WriteLine(date.ToShortDateString());
             var cdate = ChineseDate.From(date);
-            Output.WriteLine(cdate.ToString());
-            Output.WriteLine("日历名称：" + cdate.CalendarName);
-            Output.WriteLine("天干：" + cdate.CelestialStem);
-            Output.WriteLine("地支：" + cdate.TerrestrialBranch);
-            Output.WriteLine("干支：" + cdate.ChineseEra);
-            Output.WriteLine("生肖：" + cdate.AnimalSign);
-            Output.WriteLine("年份：" + cdate.YearString);
-            Output.WriteLine("月份：" + cdate.MonthString);
-            Output.WriteLine("月：" + cdate.Month);
-            Output.WriteLine("月序号：" + cdate.MonthIndex);
-            Output.WriteLine("当年总月份数：" + cdate.MonthsInYear);
-            Output.WriteLine("农历日：" + cdate.DayString);
-            Output.WriteLine("日：" + cdate.Day);
-            Output.WriteLine("当年总天数：" + cdate.DayInYear);
-            Output.WriteLine("当月总天数：" + cdate.DayInMonth);
-            Output.WriteLine("星期：" + cdate.DayOfWeek);
-            Output.WriteLine("当年第几天：" + cdate.DayOfYear);
-            Output.WriteLine("是否闰年：" + cdate.IsLeapMonth);
-            Output.WriteLine("当年的闰月份：" + cdate.LeapMonthOfYear);
+            Console.WriteLine(cdate.ToString());
+            Console.WriteLine("日历名称：" + cdate.CalendarName);
+            Console.WriteLine("天干：" + cdate.CelestialStem);
+            Console.WriteLine("地支：" + cdate.TerrestrialBranch);
+            Console.WriteLine("干支：" + cdate.ChineseEra);
+            Console.WriteLine("生肖：" + cdate.AnimalSign);
+            Console.WriteLine("年份：" + cdate.YearString);
+            Console.WriteLine("月份：" + cdate.MonthString);
+            Console.WriteLine("月：" + cdate.Month);
+            Console.WriteLine("月序号：" + cdate.MonthIndex);
+            Console.WriteLine("当年总月份数：" + cdate.MonthsInYear);
+            Console.WriteLine("农历日：" + cdate.DayString);
+            Console.WriteLine("日：" + cdate.Day);
+            Console.WriteLine("当年总天数：" + cdate.DayInYear);
+            Console.WriteLine("当月总天数：" + cdate.DayInMonth);
+            Console.WriteLine("星期：" + cdate.DayOfWeek);
+            Console.WriteLine("当年第几天：" + cdate.DayOfYear);
+            Console.WriteLine("是否闰年：" + cdate.IsLeapMonth);
+            Console.WriteLine("当年的闰月份：" + cdate.LeapMonthOfYear);
         }
+        [Fact]
+        public void Test2()
+        {
+            for(int i = 1; i <= 12; i++)
+            {
+                var cdate = ChineseDate.From(2020, i, 1);
+                Console.WriteLine(cdate.ToString());
+                var cdate2 = ChineseDate.From(2020, i, -1);
+                Console.WriteLine(cdate2.ToString());
+            }
+            for(int i = 1; i <= 13; i++)
+            {
+                var cdate = ChineseDate.FromIndex(2020, i, 1);
+                Console.WriteLine(cdate.ToString());
+                var cdate2 = ChineseDate.FromIndex(2020, i, -1);
+                Console.WriteLine(cdate2.ToString());
+            }
+        }
+
         [Fact]
         public void FromDate()
         {
             var date = DateTime.Today;
-            Output.WriteLine(date.ToShortDateString());
+            Console.WriteLine(date.ToShortDateString());
             var cdate = ChineseDate.From(date);
-            Output.WriteLine(cdate.ToString());
+            Console.WriteLine(cdate.ToString());
             var date2 = cdate.ToDate();
             var date3 = cdate.ToDate();
-            Output.WriteLine(date2.ToShortDateString());
+            Console.WriteLine(date2.ToShortDateString());
             Assert.Equal(date, date2);
             for(int i = 0; i < 100; i++)
             {
@@ -81,11 +100,11 @@ namespace XUnitTester
                 year += 1;
                 var cd2 = ChineseDate.From(year, 1, 1);
                 cdate = cdate.AddYears(1);
-                Output.WriteLine(cdate.ToString());
+                Console.WriteLine(cdate.ToString());
                 Assert.Equal(cd2, cdate);
 
                 var cd3 = ChineseDate.From(year, -1, -1);
-                Output.WriteLine(cd3.ToString());
+                Console.WriteLine(cd3.ToString());
                 Assert.True(cd3.MonthIndex == cd3.MonthsInYear);
                 Assert.True(cd3.Day == cd3.DayInMonth);
                 var cd4 = ChineseDate.FromIndex(cd3.Year, cd3.MonthIndex, cd3.Day);

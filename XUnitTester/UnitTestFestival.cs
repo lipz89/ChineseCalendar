@@ -23,34 +23,35 @@ namespace XUnitTester
             var ass = type.Assembly;
             var types = ass.GetTypes().Where(x => x.IsClass && !x.IsAbstract && x.IsSubclassOf(type)).ToList();
 
-            var festivals = new List<Festival>();
+            var festivals2 = new List<Festival>();
             foreach(var item in types)
             {
                 var ps = item.GetFields(BindingFlags.Static | BindingFlags.Public).Where(x => x.FieldType.IsSubclassOf(type));
                 var vals = ps.Select(x => x.GetValue(null)).OfType<Festival>();
                 if(vals.Any())
                 {
-                    festivals.AddRange(vals);
+                    festivals2.AddRange(vals);
                 }
             }
 
 
-            var festivals2 = new List<Festival>
+            var festivals = new List<Festival>
             {
-                ChineseFestival.DoubleNinthFestival,
-                ChineseFestival.DragonBoatFestival,
-                ChineseFestival.DragonHeadraisingDay,
-                ChineseFestival.GhostFestival,
-                ChineseFestival.LanternFestival,
-                ChineseFestival.MidAutumnFestival,
-                ChineseFestival.NewYearsEve,
-                ChineseFestival.QixiFestival,
                 ChineseFestival.SpringFestival,
-                GregorianFestival.ArborDay,
-                GregorianFestival.InternationalWorkersDay,
+                ChineseFestival.LanternFestival,
+                ChineseFestival.DragonHeadraisingDay,
+                ChineseFestival.DragonBoatFestival,
+                ChineseFestival.QixiFestival,
+                ChineseFestival.GhostFestival,
+                ChineseFestival.MidAutumnFestival,
+                ChineseFestival.DoubleNinthFestival,
+                ChineseFestival.NewYearsEve,
+
                 GregorianFestival.NewYearsDay,
+                GregorianFestival.ArborDay,
+                GregorianFestival.TheTombWeepingDay,
+                GregorianFestival.InternationalWorkersDay,
                 GregorianFestival.TheNationalDay,
-                GregorianFestival.TheTombWeepingDay
             };
 
             Assert.Equal(festivals.Count(), festivals2.Count());
@@ -58,7 +59,6 @@ namespace XUnitTester
             Assert.All<Festival>(festivals, item =>
             {
                 Output.WriteLine(item.Name + " -- " + item.Description);
-                Output.WriteLine($"{ item.FirstYear}-{ item.Month}-{ item.Day}");
                 var last = item.GetLastDate(DateTime.Today, false);
                 Output.WriteLine($"上一个{ item.Name} 在 {last:yyyy-MM-dd}");
                 var next = item.GetNextDate(DateTime.Today, true);
@@ -82,7 +82,7 @@ namespace XUnitTester
         [Fact]
         public void TestBirthday()
         {
-            var fes = new GregorianFestival("李君妍生日", 5, 12, 2017);
+            var fes = new GregorianFestival("***生日", 5, 17, 2017);
             Output.WriteLine(fes.Name + " -- " + fes.Description);
             Output.WriteLine($"{ fes.FirstYear}-{ fes.Month}-{ fes.Day}");
             DateTime? date = DateTime.Today;
