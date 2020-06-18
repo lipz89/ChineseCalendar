@@ -2,13 +2,22 @@
 
 namespace ChineseCalendar
 {
-
     /// <summary>
     /// 农历节假日
     /// </summary>
     public class ChineseFestival : LoopFestival
     {
         private ChineseFestival() { }
+        /// <summary>
+        /// 定义一个农历节假日
+        /// </summary>
+        /// <param name="name">节日名称</param>
+        /// <param name="month">月份</param>
+        /// <param name="day">日期</param>
+        /// <param name="firstYear">第一个节日的年份，0表示无永恒</param>
+        /// <param name="description">节日描述</param>
+        /// <exception cref="ArgumentNullException">没有名称</exception>
+        /// <exception cref="ArgumentOutOfRangeException">日期超出范围</exception>
         public ChineseFestival(string name, int month, int day, int firstYear = 0, string description = null)
         {
             if(string.IsNullOrWhiteSpace(name))
@@ -29,9 +38,7 @@ namespace ChineseCalendar
             this.FirstYear = firstYear;
             this.Description = description;
         }
-        /// <summary>
-        /// 春节
-        /// </summary>
+        /// <summary> 春节 </summary>
         public static readonly ChineseFestival SpringFestival = new ChineseFestival
         {
             Name = "春节",
@@ -117,6 +124,7 @@ namespace ChineseCalendar
                 return false;
             }
         }
+        /// <inheritdoc/>
         public override bool IsThisFestival(DateTime date)
         {
             var cdate = ChineseDate.From(date);

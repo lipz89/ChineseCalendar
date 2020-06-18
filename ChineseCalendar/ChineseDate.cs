@@ -14,7 +14,9 @@ namespace ChineseCalendar
         /// <summary>
         /// 转换一个公历日期为农历日期
         /// </summary>
-        /// <param name="date"></param>
+        /// <param name="date">公历日期</param>
+        /// <exception cref="ArgumentOutOfRangeException">日期超出范围</exception>
+        /// <returns>农历日期</returns>
         public static ChineseDate From(DateTime date)
         {
             try
@@ -39,13 +41,13 @@ namespace ChineseCalendar
             }
         }
         /// <summary>
-        /// 指定年月日索引，月/日可以为负数，负数表示当年/月的倒数月/日，从-1开始
-        /// 月份允许值：1-12（当年不含闰月），1-13（当年含闰月），-1表示当月最后一个月
-        /// 日期允许值：1-30（大月），1-29（小月），-1表示当月最后一天
+        /// 指定年月日索引，月/日可以为负数，负数表示倒数
         /// </summary>
-        /// <param name="year"></param>
-        /// <param name="month"></param>
-        /// <param name="day"></param>
+        /// <param name="year">年份，范围为1901-2100</param>
+        /// <param name="month">月份，允许值：1-12（当年不含闰月），1-13（当年含闰月）</param>
+        /// <param name="day">日期，允许值：1-30（大月），1-29（小月）</param>
+        /// <exception cref="ArgumentOutOfRangeException">日期超出范围</exception>
+        /// <returns>农历日期</returns>
         public static ChineseDate FromIndex(int year, int month, int day)
         {
             if(year < 1901 || year > 2100)
@@ -94,13 +96,13 @@ namespace ChineseCalendar
             return cdate;
         }
         /// <summary>
-        /// 指定年月日，月/日可以为负数，负数表示当年/月的倒数月/日，从-1开始
-        /// 月份允许值：1-12，忽略闰月，-12--1，忽略被闰月
-        /// 日期允许值：1-30（大月），1-29（小月），-1表示当月最后一天
+        /// 指定年月日，月/日可以为负数，负数表示倒数
         /// </summary>
-        /// <param name="year"></param>
-        /// <param name="month"></param>
-        /// <param name="day"></param>
+        /// <param name="year">年份，范围为1901-2100</param>
+        /// <param name="month">月份，允许值：1-12，正数忽略闰月，负数忽略被闰月</param>
+        /// <param name="day">日期，允许值：1-30（大月），1-29（小月）</param>
+        /// <exception cref="ArgumentOutOfRangeException">日期超出范围</exception>
+        /// <returns>农历日期</returns>
         public static ChineseDate From(int year, int month, int day)
         {
             if(year < 1901 || year > 2100)
@@ -159,63 +161,42 @@ namespace ChineseCalendar
             cdate.LeapMonthOfYear = Math.Max(0, leapMonth - 1);
             return cdate;
         }
-        /// <summary>
-        /// 年份
-        /// </summary>
+        /// <summary> 年份 </summary>
         public int Year { get; internal set; }
-        /// <summary>
-        /// 月份
-        /// </summary>
+        /// <summary> 月份 </summary>
         public int Month { get; internal set; }
-        /// <summary>
-        /// 月份顺序，含闰月
-        /// </summary>
+        /// <summary> 月份顺序，含闰月 </summary>
         public int MonthIndex { get; internal set; }
-        /// <summary>
-        /// 日期
-        /// </summary>
+        /// <summary> 日期 </summary>
         public int Day { get; internal set; }
-        /// <summary>
-        /// 当前月是闰月
-        /// </summary>
+        /// <summary> 当前月是闰月 </summary>
         public bool IsLeapMonth { get; internal set; }
-        /// <summary>
-        /// 当年的闰月，0表示无闰月，正常范围 1-12
-        /// </summary>
+        /// <summary> 当年的闰月，0表示无闰月，正常范围 1-12 </summary>
         public int LeapMonthOfYear { get; internal set; }
-        /// <summary>
-        /// 今天
-        /// </summary>
-        /// <returns></returns>
+        /// <summary> 今天 </summary>
         public static ChineseDate Today
         {
             get { return ChineseDate.From(DateTime.Today); }
         }
-        /// <summary>
-        /// 最小值
-        /// </summary>
-        /// <returns></returns>
+        /// <summary> 最小值 </summary> 
         public static ChineseDate MinValue
         {
             get { return ChineseDate.From(chineseCalendar.MinSupportedDateTime); }
         }
-        /// <summary>
-        /// 最大值
-        /// </summary>
-        /// <returns></returns>
+        /// <summary> 最大值 </summary>
         public static ChineseDate MaxValue
         {
             get { return ChineseDate.From(chineseCalendar.MaxSupportedDateTime); }
         }
         /// <summary>
-        /// 返回公历日期
+        /// 返回当前农历日期对应的公历日期
         /// </summary>
-        /// <returns></returns>
+        /// <returns>公历日期</returns>
         public DateTime ToDate()
         {
             return chineseCalendar.ToDateTime(this.Year, this.MonthIndex, this.Day, 0, 0, 0, 0);
         }
-
+        /// <inheritdoc/>
         public override bool Equals(object obj)
         {
             if(obj is ChineseDate cd)
@@ -225,11 +206,13 @@ namespace ChineseCalendar
             return false;
         }
 
+        /// <inheritdoc/>
         public override int GetHashCode()
         {
             return new { Year, MonthIndex, Day }.GetHashCode();
         }
 
+        /// <inheritdoc/>
         public override string ToString()
         {
             return $"{ChineseEra}[{AnimalSign}]年{MonthString}月{DayString}";
@@ -237,101 +220,67 @@ namespace ChineseCalendar
 
         private static readonly ChineseLunisolarCalendar chineseCalendar = new ChineseLunisolarCalendar();
 
-        ///<summary>
-        /// 农历月
-        ///</summary>
+        ///<summary>  农历月 </summary>
         private static readonly string MONTHSTRING = "正二三四五六七八九十冬腊";
-        ///<summary>
-        /// 农历日
-        ///</summary>
+        ///<summary> 农历日 </summary>
         private static readonly string DAYSTRING = "初一初二初三初四初五初六初七初八初九初十十一十二十三十四十五十六十七十八十九二十廿一廿二廿三廿四廿五廿六廿七廿八廿九三十";
-        ///<summary>
-        /// 十天干
-        ///</summary>
+        ///<summary> 十天干 </summary>
         private static readonly string CELESTIAL_STEMS = "甲乙丙丁戊己庚辛壬癸";
-        ///<summary>
-        /// 十二地支
-        ///</summary>
+        ///<summary> 十二地支 </summary>
         private static readonly string TERRESTRIAL_BRANCHS = "子丑寅卯辰巳午未申酉戌亥";
-        ///<summary>
-        /// 十二生肖
-        ///</summary>
+        ///<summary> 十二生肖 </summary>
         private static readonly string ANIMAL_SIGNS = "鼠牛虎免龙蛇马羊猴鸡狗猪";
-        ///<summary>
-        /// 数字
-        ///</summary>
+        ///<summary> 数字 </summary>
         private static readonly string DIGITALS = "〇一二三四五六七八九";
 
-        /// <summary>
-        /// 天干
-        /// </summary>
+        /// <summary> 天干 </summary>
         public string CelestialStem
         {
             get { return CELESTIAL_STEMS[(Year - 4) % 10].ToString(); }
         }
-        /// <summary>
-        /// 地支
-        /// </summary>
+        /// <summary> 地支 </summary>
         public string TerrestrialBranch
         {
             get { return TERRESTRIAL_BRANCHS[(Year - 4) % 12].ToString(); }
         }
-        /// <summary>
-        /// 干支
-        /// </summary>
+        /// <summary> 干支 </summary>
         public string ChineseEra
         {
             get { return CelestialStem + TerrestrialBranch; }
         }
-        /// <summary>
-        /// 属相
-        /// </summary>
+        /// <summary> 生肖属相 </summary>
         public string AnimalSign
         {
             get { return ANIMAL_SIGNS[(Year - 4) % 12].ToString(); }
         }
-        /// <summary>
-        /// 返回星期几
-        /// </summary>
+        /// <summary> 星期几 </summary>
         public DayOfWeek DayOfWeek
         {
             get { return ToDate().DayOfWeek; }
         }
-        /// <summary>
-        /// 返回一年中的第几天，闰年1-384，平年1-354
-        /// </summary>
+        /// <summary> 一年中的第几天，闰年1-384，平年1-354 </summary>
         public int DayOfYear
         {
             get { return chineseCalendar.GetDayOfYear(this.ToDate()); }
         }
-        /// <summary>
-        /// 返回当月总天数
-        /// </summary>
+        /// <summary> 当月总天数 </summary>
         public int DayInMonth
         {
             get { return chineseCalendar.GetDaysInMonth(this.Year, this.MonthIndex); }
         }
-        /// <summary>
-        /// 返回当年总天数
-        /// </summary>
+        /// <summary> 当年总天数 </summary>
         public int DayInYear
         {
             get { return chineseCalendar.GetDaysInYear(this.Year); }
         }
-        /// <summary>
-        /// 返回当年总月份数
-        /// </summary>
+        /// <summary> 当年总月份数 </summary>
         public int MonthsInYear
         {
             get { return chineseCalendar.GetMonthsInYear(this.Year); }
         }
-        /// <summary>
-        /// 日历名称
-        /// </summary>
+        /// <summary> 日历名称 </summary>
         public string CalendarName { get { return "农历"; } }
-        /// <summary>
-        /// 年的字符串
-        /// </summary>
+        /// <summary> 年的字符串 </summary>
         public string YearString
         {
             get
@@ -349,9 +298,7 @@ namespace ChineseCalendar
                 return str;
             }
         }
-        /// <summary>
-        /// 农历月
-        /// </summary>
+        /// <summary> 农历月 </summary>
         public string MonthString
         {
             get
@@ -364,9 +311,7 @@ namespace ChineseCalendar
                 return str;
             }
         }
-        /// <summary>
-        /// 农历日
-        /// </summary>
+        /// <summary> 农历日 </summary>
         public string DayString
         {
             get
@@ -375,10 +320,12 @@ namespace ChineseCalendar
             }
         }
         /// <summary>
+        /// 增加年份数值，
         /// 结果总会是非闰月的日期
         /// </summary>
-        /// <param name="value"></param>
-        /// <returns></returns>
+        /// <param name="value">年份数值，可为负数</param>
+        /// <returns>增加指定年份后的日期</returns>
+        /// <exception cref="ArgumentOutOfRangeException">日期超出范围</exception>
         public ChineseDate AddYears(int value)
         {
             if(value == 0)
@@ -402,6 +349,12 @@ namespace ChineseCalendar
             var nday = Math.Min(this.Day, days);
             return FromIndex(nyear, nmonthIndex, nday);
         }
+        /// <summary>
+        /// 增加月数，
+        /// </summary>
+        /// <param name="value">月数，可为负数</param>
+        /// <returns>增加指定月数后的日期</returns>
+        /// <exception cref="ArgumentOutOfRangeException">日期超出范围</exception>
         public ChineseDate AddMonths(int value)
         {
             if(value == 0)
@@ -450,6 +403,11 @@ namespace ChineseCalendar
             var nday = Math.Min(this.Day, days);
             return FromIndex(nyear, nmonthIndex, nday);
         }
+        /// <summary>
+        /// 增加天数，
+        /// </summary>
+        /// <param name="value">天数，可为负数</param>
+        /// <returns>增加指定天数后的日期</returns>
         public ChineseDate AddDays(int value)
         {
             if(value == 0)

@@ -13,6 +13,16 @@ namespace ChineseCalendar
         private static readonly Dictionary<int, int> monthDays = new Dictionary<int, int> {
             { 1,31},{ 2,29},{ 3,31},{ 4,30},{ 5,31},{ 6,30},{ 7,31},{ 8,31},{ 9,30},{ 10,31},{ 11,30},{ 12,31},
         };
+        /// <summary>
+        /// 定义一个公历节日
+        /// </summary>
+        /// <param name="name">节日名称</param>
+        /// <param name="month">月份</param>
+        /// <param name="day">日期</param>
+        /// <param name="firstYear">第一个节日的年份，0表示无永恒</param>
+        /// <param name="description">节日描述</param>
+        /// <exception cref="ArgumentNullException">没有名称</exception>
+        /// <exception cref="ArgumentOutOfRangeException">日期超出范围</exception>
         public GregorianFestival(string name, int month, int day, int firstYear = 0, string description = null)
         {
             if(string.IsNullOrWhiteSpace(name))
@@ -79,6 +89,7 @@ namespace ChineseCalendar
             FirstYear = 1949
         };
 
+        /// <inheritdoc/>
         public override bool IsThisFestival(DateTime date)
         {
             return date.Month == this.Month && date.Day == this.Day;

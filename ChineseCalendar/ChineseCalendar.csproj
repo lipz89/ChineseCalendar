@@ -4,6 +4,26 @@
     <TargetFrameworks>netstandard2.0;net40</TargetFrameworks>
     <Authors>lipz8900</Authors>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <RepositoryUrl>https://github.com/lipz89/ChineseCalendar</RepositoryUrl>
+    <PackageProjectUrl>https://github.com/lipz89/ChineseCalendar</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
+    <DocumentationFile>E:\GitCodes\ChineseCalendar\ChineseCalendar\ChineseCalendar.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|netstandard2.0|AnyCPU'">
+    <DocumentationFile>E:\GitCodes\ChineseCalendar\ChineseCalendar\ChineseCalendar.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Resource Include="ChineseCalendar.xml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="ChineseCalendar.xml">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
 </Project>

@@ -21,6 +21,7 @@ namespace ChineseCalendar
             }
         }
 
+        /// <inheritdoc/>
         public override DateTime? GetLastDate(DateTime? date, bool containsThisDate = false)
         {
             DateTime date2 = date.HasValue ? date.Value.Date : DateTime.Today;
@@ -43,6 +44,7 @@ namespace ChineseCalendar
             }
             return null;
         }
+        /// <inheritdoc/>
         public override DateTime? GetNextDate(DateTime? date, bool containsThisDate = false)
         {
             DateTime date2 = date.HasValue ? date.Value.Date : DateTime.Today;
@@ -66,6 +68,7 @@ namespace ChineseCalendar
             return null;
         }
 
+        /// <inheritdoc/>
         public override bool IsThisFestival(DateTime date)
         {
             return date.Month == this.Month && date.Day == this.Day;

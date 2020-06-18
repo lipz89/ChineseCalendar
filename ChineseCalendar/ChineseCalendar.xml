@@ -1,0 +1,347 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>ChineseCalendar</name>
+    </assembly>
+    <members>
+        <member name="T:ChineseCalendar.ChineseDate">
+            <summary>
+            中国农历日期
+            </summary>
+        </member>
+        <member name="M:ChineseCalendar.ChineseDate.From(System.DateTime)">
+            <summary>
+            转换一个公历日期为农历日期
+            </summary>
+            <param name="date">公历日期</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">日期超出范围</exception>
+            <returns>农历日期</returns>
+        </member>
+        <member name="M:ChineseCalendar.ChineseDate.FromIndex(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            指定年月日索引，月/日可以为负数，负数表示倒数
+            </summary>
+            <param name="year">年份，范围为1901-2100</param>
+            <param name="month">月份，允许值：1-12（当年不含闰月），1-13（当年含闰月）</param>
+            <param name="day">日期，允许值：1-30（大月），1-29（小月）</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">日期超出范围</exception>
+            <returns>农历日期</returns>
+        </member>
+        <member name="M:ChineseCalendar.ChineseDate.From(System.Int32,System.Int32,System.Int32)">
+            <summary>
+            指定年月日，月/日可以为负数，负数表示倒数
+            </summary>
+            <param name="year">年份，范围为1901-2100</param>
+            <param name="month">月份，允许值：1-12，正数忽略闰月，负数忽略被闰月</param>
+            <param name="day">日期，允许值：1-30（大月），1-29（小月）</param>
+            <exception cref="T:System.ArgumentOutOfRangeException">日期超出范围</exception>
+            <returns>农历日期</returns>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.Year">
+            <summary> 年份 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.Month">
+            <summary> 月份 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.MonthIndex">
+            <summary> 月份顺序，含闰月 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.Day">
+            <summary> 日期 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.IsLeapMonth">
+            <summary> 当前月是闰月 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.LeapMonthOfYear">
+            <summary> 当年的闰月，0表示无闰月，正常范围 1-12 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.Today">
+            <summary> 今天 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.MinValue">
+            <summary> 最小值 </summary> 
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.MaxValue">
+            <summary> 最大值 </summary>
+        </member>
+        <member name="M:ChineseCalendar.ChineseDate.ToDate">
+            <summary>
+            返回当前农历日期对应的公历日期
+            </summary>
+            <returns>公历日期</returns>
+        </member>
+        <member name="M:ChineseCalendar.ChineseDate.Equals(System.Object)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ChineseCalendar.ChineseDate.GetHashCode">
+            <inheritdoc/>
+        </member>
+        <member name="M:ChineseCalendar.ChineseDate.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="F:ChineseCalendar.ChineseDate.MONTHSTRING">
+            <summary>  农历月 </summary>
+        </member>
+        <member name="F:ChineseCalendar.ChineseDate.DAYSTRING">
+            <summary> 农历日 </summary>
+        </member>
+        <member name="F:ChineseCalendar.ChineseDate.CELESTIAL_STEMS">
+            <summary> 十天干 </summary>
+        </member>
+        <member name="F:ChineseCalendar.ChineseDate.TERRESTRIAL_BRANCHS">
+            <summary> 十二地支 </summary>
+        </member>
+        <member name="F:ChineseCalendar.ChineseDate.ANIMAL_SIGNS">
+            <summary> 十二生肖 </summary>
+        </member>
+        <member name="F:ChineseCalendar.ChineseDate.DIGITALS">
+            <summary> 数字 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.CelestialStem">
+            <summary> 天干 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.TerrestrialBranch">
+            <summary> 地支 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.ChineseEra">
+            <summary> 干支 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.AnimalSign">
+            <summary> 生肖属相 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.DayOfWeek">
+            <summary> 星期几 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.DayOfYear">
+            <summary> 一年中的第几天，闰年1-384，平年1-354 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.DayInMonth">
+            <summary> 当月总天数 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.DayInYear">
+            <summary> 当年总天数 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.MonthsInYear">
+            <summary> 当年总月份数 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.CalendarName">
+            <summary> 日历名称 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.YearString">
+            <summary> 年的字符串 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.MonthString">
+            <summary> 农历月 </summary>
+        </member>
+        <member name="P:ChineseCalendar.ChineseDate.DayString">
+            <summary> 农历日 </summary>
+        </member>
+        <member name="M:ChineseCalendar.ChineseDate.AddYears(System.Int32)">
+            <summary>
+            增加年份数值，
+            结果总会是非闰月的日期
+            </summary>
+            <param name="value">年份数值，可为负数</param>
+            <returns>增加指定年份后的日期</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">日期超出范围</exception>
+        </member>
+        <member name="M:ChineseCalendar.ChineseDate.AddMonths(System.Int32)">
+            <summary>
+            增加月数，
+            </summary>
+            <param name="value">月数，可为负数</param>
+            <returns>增加指定月数后的日期</returns>
+            <exception cref="T:System.ArgumentOutOfRangeException">日期超出范围</exception>
+        </member>
+        <member name="M:ChineseCalendar.ChineseDate.AddDays(System.Int32)">
+            <summary>
+            增加天数，
+            </summary>
+            <param name="value">天数，可为负数</param>
+            <returns>增加指定天数后的日期</returns>
+        </member>
+        <member name="T:ChineseCalendar.ChineseFestival">
+            <summary>
+            农历节假日
+            </summary>
+        </member>
+        <member name="M:ChineseCalendar.ChineseFestival.#ctor(System.String,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            定义一个农历节假日
+            </summary>
+            <param name="name">节日名称</param>
+            <param name="month">月份</param>
+            <param name="day">日期</param>
+            <param name="firstYear">第一个节日的年份，0表示无永恒</param>
+            <param name="description">节日描述</param>
+            <exception cref="T:System.ArgumentNullException">没有名称</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">日期超出范围</exception>
+        </member>
+        <member name="F:ChineseCalendar.ChineseFestival.SpringFestival">
+            <summary> 春节 </summary>
+        </member>
+        <member name="F:ChineseCalendar.ChineseFestival.LanternFestival">
+            <summary> 元宵节 </summary>
+        </member>
+        <member name="F:ChineseCalendar.ChineseFestival.DragonHeadraisingDay">
+            <summary> 龙抬头 </summary>
+        </member>
+        <member name="F:ChineseCalendar.ChineseFestival.DragonBoatFestival">
+            <summary> 端午 </summary>
+        </member>
+        <member name="F:ChineseCalendar.ChineseFestival.QixiFestival">
+            <summary> 七夕 </summary>
+        </member>
+        <member name="F:ChineseCalendar.ChineseFestival.GhostFestival">
+            <summary> 中元节 </summary>
+        </member>
+        <member name="F:ChineseCalendar.ChineseFestival.MidAutumnFestival">
+            <summary> 中秋 </summary>
+        </member>
+        <member name="F:ChineseCalendar.ChineseFestival.DoubleNinthFestival">
+            <summary> 重阳节 </summary>
+        </member>
+        <member name="F:ChineseCalendar.ChineseFestival.NewYearsEve">
+            <summary> 除夕 </summary>
+        </member>
+        <member name="M:ChineseCalendar.ChineseFestival.IsThisFestival(System.DateTime)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ChineseCalendar.Festival">
+            <summary>
+            节日
+            </summary>
+        </member>
+        <member name="P:ChineseCalendar.Festival.Name">
+            <summary> 节日名称 </summary>
+        </member>
+        <member name="P:ChineseCalendar.Festival.Description">
+            <summary> 描述 </summary>
+        </member>
+        <member name="P:ChineseCalendar.Festival.FirstYear">
+            <summary> 节日设立年份 </summary>
+        </member>
+        <member name="P:ChineseCalendar.Festival.Month">
+            <summary> 月份 </summary>
+        </member>
+        <member name="P:ChineseCalendar.Festival.Day">
+            <summary> 日期 </summary>
+        </member>
+        <member name="M:ChineseCalendar.Festival.GetLastDate(System.Nullable{System.DateTime},System.Boolean)">
+            <summary>
+            获取指定公历日期前一个节日
+            </summary>
+            <param name="date">指定公历日期</param>
+            <param name="containsThisDate">是否包含指定日期</param>
+            <returns>前一个节日，null表示前面没有该节日</returns>
+        </member>
+        <member name="M:ChineseCalendar.Festival.GetNextDate(System.Nullable{System.DateTime},System.Boolean)">
+            <summary>
+            获取指定公历日期后一个节日
+            </summary>
+            <param name="date">指定公历日期</param>
+            <param name="containsThisDate">是否包含指定日期</param>
+            <returns>后一个节日，null表示后面没有该节日</returns>
+        </member>
+        <member name="M:ChineseCalendar.Festival.IsThisFestival(System.DateTime)">
+            <summary>
+            判断指定公历日期是否本节日
+            </summary>
+            <param name="date">指定公历日期</param>
+            <returns>true该日期是当前节日，否则不是</returns>
+        </member>
+        <member name="M:ChineseCalendar.Festival.ToString">
+            <inheritdoc/>
+        </member>
+        <member name="T:ChineseCalendar.FixDateFestival">
+            <summary>
+            固定公历日期节假日
+            </summary>
+        </member>
+        <member name="P:ChineseCalendar.FixDateFestival.Year">
+            <summary> 年份 </summary>
+        </member>
+        <member name="P:ChineseCalendar.FixDateFestival.Date">
+            <summary> 日期 </summary>
+        </member>
+        <member name="M:ChineseCalendar.FixDateFestival.#ctor(System.String,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            定义一个固定公历日期节假日
+            </summary>
+            <param name="name">节日名称</param>
+            <param name="year">年份</param>
+            <param name="month">月份</param>
+            <param name="day">日期</param>
+            <param name="description">节日描述</param>
+            <exception cref="T:System.ArgumentNullException">没有名称</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">年月日超出范围</exception>
+        </member>
+        <member name="M:ChineseCalendar.FixDateFestival.#ctor(System.String,System.DateTime,System.String)">
+            <summary>
+            定义一个固定公历日期节假日
+            </summary>
+            <param name="name">节日名称</param>
+            <param name="date">节日的公历日期</param>
+            <param name="description">节日描述</param>
+            <exception cref="T:System.ArgumentNullException">没有名称</exception>
+        </member>
+        <member name="M:ChineseCalendar.FixDateFestival.GetLastDate(System.Nullable{System.DateTime},System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ChineseCalendar.FixDateFestival.GetNextDate(System.Nullable{System.DateTime},System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ChineseCalendar.FixDateFestival.IsThisFestival(System.DateTime)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ChineseCalendar.GregorianFestival">
+            <summary>
+            公历节假日
+            </summary>
+        </member>
+        <member name="M:ChineseCalendar.GregorianFestival.#ctor(System.String,System.Int32,System.Int32,System.Int32,System.String)">
+            <summary>
+            定义一个公历节日
+            </summary>
+            <param name="name">节日名称</param>
+            <param name="month">月份</param>
+            <param name="day">日期</param>
+            <param name="firstYear">第一个节日的年份，0表示无永恒</param>
+            <param name="description">节日描述</param>
+            <exception cref="T:System.ArgumentNullException">没有名称</exception>
+            <exception cref="T:System.ArgumentOutOfRangeException">日期超出范围</exception>
+        </member>
+        <member name="F:ChineseCalendar.GregorianFestival.NewYearsDay">
+            <summary> 元旦 </summary>
+        </member>
+        <member name="F:ChineseCalendar.GregorianFestival.ArborDay">
+            <summary> 植树节 </summary>
+        </member>
+        <member name="F:ChineseCalendar.GregorianFestival.TheTombWeepingDay">
+            <summary> 清明 </summary>
+        </member>
+        <member name="F:ChineseCalendar.GregorianFestival.InternationalWorkersDay">
+            <summary> 劳动节 </summary>
+        </member>
+        <member name="F:ChineseCalendar.GregorianFestival.TheNationalDay">
+            <summary> 国庆节 </summary>
+        </member>
+        <member name="M:ChineseCalendar.GregorianFestival.IsThisFestival(System.DateTime)">
+            <inheritdoc/>
+        </member>
+        <member name="T:ChineseCalendar.LoopFestival">
+            <summary>
+            循环节假日
+            </summary>
+        </member>
+        <member name="M:ChineseCalendar.LoopFestival.GetLastDate(System.Nullable{System.DateTime},System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ChineseCalendar.LoopFestival.GetNextDate(System.Nullable{System.DateTime},System.Boolean)">
+            <inheritdoc/>
+        </member>
+        <member name="M:ChineseCalendar.LoopFestival.IsThisFestival(System.DateTime)">
+            <inheritdoc/>
+        </member>
+    </members>
+</doc>

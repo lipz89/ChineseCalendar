@@ -18,25 +18,26 @@ namespace ChineseCalendar
         /// <summary> 日期 </summary>
         public int Day { get; protected set; }
         /// <summary>
-        /// 获取指定日期前一个节日
+        /// 获取指定公历日期前一个节日
         /// </summary>
-        /// <param name="date">指定日期</param>
+        /// <param name="date">指定公历日期</param>
         /// <param name="containsThisDate">是否包含指定日期</param>
-        /// <returns></returns>
+        /// <returns>前一个节日，null表示前面没有该节日</returns>
         public abstract DateTime? GetLastDate(DateTime? date = null, bool containsThisDate = false);
         /// <summary>
-        /// 获取指定日期后一个节日
+        /// 获取指定公历日期后一个节日
         /// </summary>
-        /// <param name="date">指定日期</param>
+        /// <param name="date">指定公历日期</param>
         /// <param name="containsThisDate">是否包含指定日期</param>
-        /// <returns></returns>
+        /// <returns>后一个节日，null表示后面没有该节日</returns>
         public abstract DateTime? GetNextDate(DateTime? date = null, bool containsThisDate = false);
         /// <summary>
-        /// 判断指定日期是否本节日
+        /// 判断指定公历日期是否本节日
         /// </summary>
-        /// <param name="date"></param>
-        /// <returns></returns>
+        /// <param name="date">指定公历日期</param>
+        /// <returns>true该日期是当前节日，否则不是</returns>
         public abstract bool IsThisFestival(DateTime date);
+        /// <inheritdoc/>
         public override string ToString()
         {
             return this.Name;
