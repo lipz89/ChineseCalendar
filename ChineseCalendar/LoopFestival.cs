@@ -7,6 +7,14 @@ namespace ChineseCalendar
     /// </summary>
     public abstract class LoopFestival : Festival
     {
+        /// <summary>
+        /// 尝试根据年月日获取一个日期
+        /// </summary>
+        /// <param name="year">年</param>
+        /// <param name="month">月</param>
+        /// <param name="day">日</param>
+        /// <param name="date">返回日期</param>
+        /// <returns>是否取到合法日期</returns>
         protected virtual bool TryGetDate(int year, int month, int day, out DateTime date)
         {
             try

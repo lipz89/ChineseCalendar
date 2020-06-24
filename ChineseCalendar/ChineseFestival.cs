@@ -111,6 +111,7 @@ namespace ChineseCalendar
             Day = -1,
         };
 
+        /// <inheritdoc/>
         protected override bool TryGetDate(int year, int month, int day, out DateTime date)
         {
             try

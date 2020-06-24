@@ -204,6 +204,9 @@
         <member name="F:ChineseCalendar.ChineseFestival.NewYearsEve">
             <summary> 除夕 </summary>
         </member>
+        <member name="M:ChineseCalendar.ChineseFestival.TryGetDate(System.Int32,System.Int32,System.Int32,System.DateTime@)">
+            <inheritdoc/>
+        </member>
         <member name="M:ChineseCalendar.ChineseFestival.IsThisFestival(System.DateTime)">
             <inheritdoc/>
         </member>
@@ -333,6 +336,16 @@
             <summary>
             循环节假日
             </summary>
+        </member>
+        <member name="M:ChineseCalendar.LoopFestival.TryGetDate(System.Int32,System.Int32,System.Int32,System.DateTime@)">
+            <summary>
+            尝试根据年月日获取一个日期
+            </summary>
+            <param name="year">年</param>
+            <param name="month">月</param>
+            <param name="day">日</param>
+            <param name="date">返回日期</param>
+            <returns>是否取到合法日期</returns>
         </member>
         <member name="M:ChineseCalendar.LoopFestival.GetLastDate(System.Nullable{System.DateTime},System.Boolean)">
             <inheritdoc/>

@@ -7,6 +7,8 @@
     <RepositoryUrl>https://github.com/lipz89/ChineseCalendar</RepositoryUrl>
     <PackageProjectUrl>https://github.com/lipz89/ChineseCalendar</PackageProjectUrl>
     <PackageRequireLicenseAcceptance>false</PackageRequireLicenseAcceptance>
+    <Description>中国农历日期，中国传统农历节假日，公历节假日，特殊节假日</Description>
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|netstandard2.0|AnyCPU'">
